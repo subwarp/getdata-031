@@ -1,44 +1,28 @@
 # Getting and cleaning data course project
-library(dplyr)
-library(logging)
-basicConfig(level = 'DEBUG')
-setLevel('DEBUG')
+#
+# R script called run_analysis.R that does the following. 
+# 
+# 1. Merges the training and the test sets to create one data set.
+# 2. Extracts only the measurements on the mean and standard deviation for each
+#    measurement. 
+# 3. Uses descriptive activity names to name the activities in the data set
+# 4. Appropriately labels the data set with descriptive variable names. 
+# 5. From the data set in step 4, creates a second, independent tidy data set
+#    with the average of each variable for each activity and each subject.
+
 
 # Setup
-project.dir <- "~/src/jhu-data-science-course/get-clean-data"
+project.dir <- "~/src/getdata-031/"
 setwd(project.dir)
-source("../common/myutils.R")
+
+library(dplyr)
 
 # Handy paths
+# Note, download and unzip dataset into directory "UCI HAR Dataset"
+# Or change the value of data.dir accordingly
 data.dir <- file.path(project.dir, "UCI HAR Dataset" )
 data.train.dir <- file.path(data.dir, "train")
 data.test.dir <- file.path(data.dir, "test")
-
-DownloadDataset <- function(force = FALSE) {
-  # Downloads and unzips dataset if not already downloaded.
-  # Attempt to be idempotent. force  = TRUE will remove any traces of previous
-  # downloads. then it will download and extract again.
-  
-  zip.file <- file.path(project.dir, sprintf("%s.zip", basename(data.dir)))
-  data.url <- sprintf("https://d396qusza40orc.cloudfront.net/%s",
-                      "getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip")
-
-  if (FALSE == force) {
-    if (dir.exists(data.dir)) {
-      stop(sprintf("Data dir: %s exists. %s",
-                   "Remove it first or use force = TRUE", data.dir))
-    }
-  } else {
-    loginfo("Warning, force parameter set to TRUE")
-    myutils.FileRemoveIfExists(data.dir)
-    myutils.FileRemoveIfExists(zip.file)
-  }
-
-  myutils.DownloadIfNeeded(data.url, 
-                           destdir = project.dir, 
-                           destfile = zip.file)  
-  myutils.DownloadIfNeeded(zip.file)    
-}
 
 SanitizeFeatureLabel <- function(label) {
   # Part 4 of assignment: Appropriately labels the data set with
@@ -108,7 +92,6 @@ LoadSubjectsTable <- function(file.name, ...) {
 LoadActivityLableTable <- function(...) {
   # Loads activity dataset. 
   # Returns a data.frame of Dim (6x2)
-  logdebug("Running LoadActivityLableTable")
   activities <- read.csv(file.path(data.dir, "activity_labels.txt"),
                          header = FALSE, sep=" ",
                          col.names = c("activity.id", "activity.label"), ...)
