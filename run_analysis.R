@@ -26,7 +26,7 @@ data.test.dir <- file.path(data.dir, "test")
 
 SanitizeFeatureLabel <- function(label) {
   # As per part 4 of assignment: Appropriately labels the data set with
-  # escriptive variable names.
+  # descriptive variable names.
   #
   # Function sanitizes Column Names. Column names as they
   # are, have multiple issues that violate tidy data rules
@@ -158,8 +158,8 @@ LoadAndTidyDataSet <- function(data.set,
   #
   # Add the activity label to the activity id vector. Will use the 'merge' 
   # function to join the two data sets. To deal with the 'merge' function
-  # sideafecting row order, we will Add a numeric column with a unique
-  # identifier of wach row. Basically, we add an index column.
+  # side effecting row order, we will Add a numeric column with a unique
+  # identifier of each row. Basically, we add an index column.
   y_data <- cbind(index = 1:nrow(y_data), y_data)  # Add index column
   y_data <- merge(y_data, activity.labels,  # Do merge
                   by.x = "activity.id", by.y = "activity.id")
