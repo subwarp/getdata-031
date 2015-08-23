@@ -3,6 +3,8 @@
 ##Technical Specification
 
 
+Using the [Human Activity Recognition Using Smartphones Dataset](http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones), Create a R script called run_analysis.R that does the following:
+
  1. Merges the training and the test sets to create one data set.
  2. Extracts only the measurements on the mean and standard deviation for each measurement. 
  3. Uses descriptive activity names to name the activities in the data set
@@ -16,7 +18,7 @@ My strategy was abstract the code that reads, sanitizes and applies statistics t
 
 ##Functions
 
-There are a number of helper functions that isolate code for loading, sanitizing, selecting columns based on patterns. The two most interesthing functions are LoadAndTidyDataSet() and MakeTidy().
+There are a number of helper functions that isolate code for loading, sanitizing, selecting columns based on patterns. The two most interesting functions are LoadAndTidyDataSet() and MakeTidy().
 
 Note: there are comments in the code that identify what part of the Technical Specification is being addressed. Those areas are tagged with the string "As per part".
 
