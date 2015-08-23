@@ -34,7 +34,7 @@ This is the main method and interface to the script. This method is in charge of
 2. Download dataset from the location provided in the project page.
 3. Extract zip archive into folder "UCI HAR Dataset" under the root folder where you cloned this repo.
 4. Start R.
-5. Set working directory accordingly
+5. Set working directory accordingly. Open up run_analysis.R and modify the project.dir variable on line 15 to the location where you cloned this repo.
 4. Source("run_analysis.R")
 5. Call MakeTidy()
 6. Find output file 'tidy_data.txt' in the same directory where run_analysis.R is located. 
