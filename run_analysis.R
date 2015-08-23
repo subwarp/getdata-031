@@ -20,12 +20,12 @@ library(dplyr)
 # Handy paths
 # Note, download and unzip dataset into directory "UCI HAR Dataset"
 # Or change the value of data.dir accordingly
-data.dir <- file.path(project.dir, "UCI HAR Dataset" )
+data.dir <- file.path(project.dir, "UCI HAR Dataset")
 data.train.dir <- file.path(data.dir, "train")
 data.test.dir <- file.path(data.dir, "test")
 
 SanitizeFeatureLabel <- function(label) {
-  # Part 4 of assignment: Appropriately labels the data set with
+  # As per part 4 of assignment: Appropriately labels the data set with
   # escriptive variable names.
   #
   # Function sanitizes Column Names. Column names as they
@@ -123,11 +123,11 @@ LoadAndTidyDataSet <- function(data.set,
   # It does the following
   #  1. Loads X_data
   #  2. Selects desired columns
-  #  2. Loads y_data
+  #  3. Loads y_data
   #  4. Adds a column of activity labels to corresponding activity id
-  #  3. Loads subjects table
-  #  4. Sanitizes variable names (Col names)
-  #  5. Loads and merges subject ids
+  #  5. Loads subjects table
+  #  6. Sanitizes variable names (Col names)
+  #  7. Loads and merges subject ids
   
 
   # Validate
@@ -180,37 +180,38 @@ LoadAndTidyDataSet <- function(data.set,
 
 
 #### Main
+MakeTidy <- function() {
+  # Prep some data
+  features.table <- LoadFeaturesTable()
+  activity.labels <- LoadActivityLableTable()
 
-# Prep some data
-features.table <- LoadFeaturesTable()
-activity.labels <- LoadActivityLableTable()
+  # Load data sets
+  X_test <- LoadAndTidyDataSet("test", 
+                               features.table, 
+                               activity.labels)
+  
+  X_train <- LoadAndTidyDataSet("train", 
+                                features.table, 
+                                activity.labels)
 
-# Load data sets
-X_test <- LoadAndTidyDataSet("test", 
-                              features.table, 
-                              activity.labels)
+  # As per part 1 of the assignment: Merges the training and the test
+  # sets to create one data set.
+  X <- rbind(X_test, X_train)
+  X <- select(X, -activity.id)
 
-X_train <- LoadAndTidyDataSet("train", 
-                              features.table, 
-                              activity.labels)
+  # As per part 5 of the assignment, calculate the mean of each variable
+  # based on subject and activity.
+  tidy <- arrange(aggregate(. ~ subject.id + activity.label,
+                            data=X, FUN=mean, na.rm=TRUE), subject.id)
 
-# As per part 1 of the assignment: Merges the training and the test
-# sets to create one data set.
-X <- rbind(X_test, X_train)
-X <- select(X, -activity.id)
+  # Rename variable names, suffix them with _Mean
+  library(plyr)
+  tidy <- rename(tidy,
+                 sapply(colnames(tidy)[-(1:2)],
+                        function(col) {
+                          col = paste(col, "_Mean", sep="")
+                        }))
 
-# As per part 5 of the assignment, calculate the mean of each variable
-# based on subject and activity.
-tidy <- arrange(aggregate(. ~ subject.id + activity.label,
-                          data=X, FUN=mean, na.rm=TRUE), subject.id)
-
-# Rename variable names, suffix them with _Mean
-library(plyr)
-tidy <- rename(tidy,
-               sapply(colnames(tidy)[-(1:2)],
-                      function(col) {
-                        col = paste(col, "_Mean", sep="")
-                      }))
-
-# Generate a file with tidy data
-write.table(tidy, file="tidy_data.txt", row.name=FALSE)
+  # Generate a file with tidy data
+  write.table(tidy, file="tidy_data.txt", row.name=FALSE)
+}
