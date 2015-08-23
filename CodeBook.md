@@ -31,7 +31,7 @@ The zip archived contained multiple files. Below is a partial list which include
 ###Notes on the original (raw) data 
 As a whole, the raw data was devided into a test and training set. These two datasets were re-combined again for the propuse of this experiment.
 
-####For each record we received provided:
+####For each record we received:
  * Triaxial acceleration from the accelerometer (total acceleration) and the estimated body acceleration.
  * Triaxial Angular velocity from the gyroscope. 
  * A 561-**feature** vector with time and frequency domain variables. 
@@ -43,14 +43,35 @@ As a whole, the raw data was devided into a test and training set. These two dat
 The original source of the features processed were originally part of a database of measurements from the **Samsung Galaxy S II** _accelerometer_ and _gyroscope_ 3-axial raw signals tAcc-XYZ and tGyro-XYZ. The signals were then processed and subsequently used to generate statistics.
 
 
+
+##Creating the tidy datafile
+
+###Guide to create the tidy data file
+1. Download data from the link provided at the project page.
+2. Extract the data in the same directory where the run_analysis.R script is located. Make sure to extract the data into a directory named: "UCI HAR Dataset". Alternativaly change the script accordingly.
+3. Source the R script run_analysis.R
+4. Call the function MakeTidy()
+5. Locate output file: tidy_data.txt in the same directory whre the script run_analysis.R is located.
+
+###Cleaning of the data
+The data was loaded from various files into R.
+A subset of columns were selected and their names were sanitized and renamed to better meet tidy data guidelines.
+Data from the different sources was merged into a data frame.
+The mean statistic was applied to the appropriate variables.
+A new tidy file was generated.
+
+Check out the [README](./README.md)) for more details.
+
+
 ####Variables
-#####Features variables
+
 Note: The following feature variables are a subset of the original dataset. We selected only values that measured means and standard deviation. There are two root measurement sources from the Samsung Galaxy S II - the _accelerometer_ and _gyroscope_
 
 As stated earlier, accelerometer measurements have the pattern tAcc-XYZ, where as gyroscope measurements have the pattern tGyro-XYZ. Incidently, the variables are prefixed with either a 't' or a 'f'. Variables prefixed with 't' are for time domain signals, whereas variables prefixed with 'f' are for frequency domain sugnals. Detailed information can be found in the raw datas features_info.txt file.
 
 
 Note: feature measurements are the mean values of the derived from variable aggregated by subject id and activity type
+
 <table>
     <tr>
         <th>Variable</th>
