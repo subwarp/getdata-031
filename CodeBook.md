@@ -12,7 +12,7 @@ Take the [Human Activity Recognition Using Smartphones Dataset](http://archive.i
 ##Study design and data processing
 
 ###Collection of the raw data
-All datafiles were part of a zip archive. The canonical source of the data can be found [here](http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones).
+All data files were part of a zip archive. The canonical source of the data can be found [here](http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones).
 
 The zip archived contained multiple files. Below is a partial list which includes the files that were referenced or processed for this exercise. 
 - README.txt
@@ -29,7 +29,7 @@ The zip archived contained multiple files. Below is a partial list which include
 
 
 ###Notes on the original (raw) data 
-As a whole, the raw data was devided into a test and training set. These two datasets were re-combined again for the propuse of this experiment.
+As a whole, the raw data was divided into a test and training set. These two datasets were re-combined again for the purpose of this experiment.
 
 ####For each record we received:
  * Triaxial acceleration from the accelerometer (total acceleration) and the estimated body acceleration.
@@ -48,10 +48,10 @@ The original source of the features processed were originally part of a database
 
 ###Guide to create the tidy data file
 1. Download data from the link provided at the project page.
-2. Extract the data in the same directory where the run_analysis.R script is located. Make sure to extract the data into a directory named: "UCI HAR Dataset". Alternativaly change the script accordingly.
+2. Extract the data in the same directory where the run_analysis.R script is located. Make sure to extract the data into a directory named: "UCI HAR Dataset". Alternatively change the script accordingly.
 3. Source the R script run_analysis.R
 4. Call the function MakeTidy()
-5. Locate output file: tidy_data.txt in the same directory whre the script run_analysis.R is located.
+5. Locate output file: tidy_data.txt in the same directory where the script run_analysis.R is located.
 
 ###Cleaning of the data
 The data was loaded from various files into R.
@@ -67,7 +67,7 @@ Check out the [README](./README.md)) for more details.
 
 Note: The following feature variables are a subset of the original dataset. We selected only values that measured means and standard deviation. There are two root measurement sources from the Samsung Galaxy S II - the _accelerometer_ and _gyroscope_
 
-As stated earlier, accelerometer measurements have the pattern tAcc-XYZ, where as gyroscope measurements have the pattern tGyro-XYZ. Incidently, the variables are prefixed with either a 't' or a 'f'. Variables prefixed with 't' are for time domain signals, whereas variables prefixed with 'f' are for frequency domain sugnals. Detailed information can be found in the raw datas features_info.txt file.
+As stated earlier, accelerometer measurements have the pattern tAcc-XYZ, where as gyroscope measurements have the pattern tGyro-XYZ. Incidentally, the variables are prefixed with either a 't' or a 'f'. Variables prefixed with 't' are for time domain signals, whereas variables prefixed with 'f' are for frequency domain signals. Detailed information can be found in the raw data features_info.txt file.
 
 
 Note: feature measurements are the mean values of the derived from variable aggregated by subject id and activity type
