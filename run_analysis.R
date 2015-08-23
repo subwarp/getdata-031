@@ -199,9 +199,18 @@ X_train <- LoadAndTidyDataSet("train",
 X <- rbind(X_test, X_train)
 X <- select(X, -activity.id)
 
-# As per part 5 of the assignment: 
+# As per part 5 of the assignment, calculate the mean of each variable
+# based on subject and activity.
 tidy <- arrange(aggregate(. ~ subject.id + activity.label,
                           data=X, FUN=mean, na.rm=TRUE), subject.id)
+
+# Rename variable names, suffix them with _Mean
+library(plyr)
+tidy <- rename(tidy,
+               sapply(colnames(tidy)[-(1:2)],
+                      function(col) {
+                        col = paste(col, "_Mean", sep="")
+                      }))
 
 # Generate a file with tidy data
 write.table(tidy, file="tidy_data.txt", row.name=FALSE)
