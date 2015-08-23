@@ -40,7 +40,7 @@ As a whole, the raw data was divided into a test and training set. These two dat
 
 ####Features
 
-The original source of the features processed were originally part of a database of measurements from the **Samsung Galaxy S II** _accelerometer_ and _gyroscope_ 3-axial raw signals tAcc-XYZ and tGyro-XYZ. The signals were then processed and subsequently used to generate statistics.
+The source of the features processed were originally part of a database of measurements from the **Samsung Galaxy S II** _accelerometer_ and _gyroscope_ 3-axial raw signals tAcc-XYZ and tGyro-XYZ. The signals were then processed and subsequently used to generate statistics.
 
 
 
@@ -60,7 +60,7 @@ Data from the different sources was merged into a data frame.
 The mean statistic was applied to the appropriate variables.
 A new tidy file was generated.
 
-Check out the [README](./README.md)) for more details.
+Check out the [README](./README.md) for more details.
 
 
 ####Variables
@@ -70,7 +70,7 @@ Note: The following feature variables are a subset of the original dataset. We s
 As stated earlier, accelerometer measurements have the pattern tAcc-XYZ, where as gyroscope measurements have the pattern tGyro-XYZ. Incidentally, the variables are prefixed with either a 't' or a 'f'. Variables prefixed with 't' are for time domain signals, whereas variables prefixed with 'f' are for frequency domain signals. Detailed information can be found in the raw data features_info.txt file.
 
 
-Note: feature measurements are the mean values of the derived from variable aggregated by subject id and activity type
+Note: feature measurements are the mean values of the original derived variable aggregated by subject id and activity type
 
 <table>
     <tr>
